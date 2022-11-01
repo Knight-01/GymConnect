@@ -18,6 +18,7 @@ namespace API.Data
 
         // public DbSet<AppUser> Users { get; set; }
         public DbSet<UserLike> Likes { get; set;}
+        public DbSet <UserInvite> Invites { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -53,6 +54,21 @@ namespace API.Data
                 .WithMany(l => l.LikedByUsers)
                 .HasForeignKey(s => s.LikedUserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserInvite>()
+                .HasKey(k => new {k.SourceUserId, k.InvitedUserId});
+
+            builder.Entity<UserInvite>()
+                .HasOne(s => s.SourceUser)
+                .WithMany(i => i.InvitedUsers)
+                .HasForeignKey(s => s.SourceUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserInvite>()
+                .HasOne(s => s.InvitedUser)
+                .WithMany(i => i.InvitedByUsers)
+                .HasForeignKey(s => s.InvitedUserId)
+                .OnDelete(DeleteBehavior.Cascade);      
 
             builder.Entity<Message>()
                 .HasOne(u => u.Recipient)

@@ -11,7 +11,11 @@ namespace API.DTOs
         public DateTime LastActive { get; set; }
         public string Gender { get; set; }
         public string Introduction { get; set; }
-        public string LookingFor { get; set; }
+        public string WorkoutRoutine { get; set; }
+        public string DietaryPlan { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        // public int Bmi { get; set; }
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }

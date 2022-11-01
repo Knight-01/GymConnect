@@ -1,4 +1,4 @@
-<div class="text-center mt-3">
+<!-- <div class="text-center mt-3">
     <h2>Your matches - {{pagination?.totalItems}} found</h2>
 </div>
 
@@ -6,13 +6,13 @@
     <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
         <div class="form-group">
             <label>Age from: </label>
-            <input type="number" class="form-control ml-1" style="width: 70px;" name="minAge" 
+            <input type="number" class="form-control ml-1" style="width: 70px;" name="minAge"
                 [(ngModel)]="userParams.minAge">
         </div>
 
         <div class="form-group px-2">
             <label>Age to: </label>
-            <input type="number" class="form-control ml-1" style="width: 70px;" name="maxAge" 
+            <input type="number" class="form-control ml-1" style="width: 70px;" name="maxAge"
                 [(ngModel)]="userParams.maxAge">
         </div>
 
@@ -35,18 +35,18 @@
                     (click)="loadMembers()"
                     btnRadio="lastActive"
                     [(ngModel)]="userParams.orderBy">Last Active</button>
-            
+
                 <button
                     type="button"
                     class="btn btn-primary"
                     name="orderBy"
                     (click)="loadMembers()"
                     btnRadio="created"
-                    [(ngModel)]="userParams.orderBy">Newest members</button>
+                    [(ngModel)]="userParams.orderBy">Latest members</button>
             </div>
 
         </div>
-       
+
     </form>
 </div>
 <div class="row">
@@ -56,16 +56,127 @@
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="pagination">
-    <pagination 
+    <pagination
         [totalItems]="pagination.totalItems"
-        [boundaryLinks]="true" 
+        [boundaryLinks]="true"
         [itemsPerpage]="pagination.itemsPerPage"
         [(ngModel)]="pagination.currentPage"
         (pageChanged)="pageChanged($event)"
         [maxSize]="10"
-        previousText="&lsaquo;" 
-        nextText="&rsaquo;" 
-        firstText="&laquo;" 
-        lastText="&raquo;">    
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;">
 </pagination>
-</div>
+</div> -->
+
+
+<div class="main-container">
+
+  <!-- <app-breadcrumb></app-breadcrumb> -->
+  <section class="space-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-9 mb-1 order-md-2">
+          <div class="card card-sm">
+            <div class="card-header bg-secondary d-flex justify-content-between align-items-center">
+              <div>
+                <h6>Buddies</h6>
+              </div>
+              <form form="ngForm" (change)="loadMembers()" class="d-flex align-items-center">
+                <span class="mr-2 text-muted text-small text-nowrap">Sort by:</span>
+                <select class="custom-select" name="orderby" [(ngModel)]="userParams.orderBy">
+                  <option value="lastActive" selected>Last Active</option>
+                  <option value="created">Newest</option>
+                </select>
+              </form>
+            </div>
+
+            <div class="row">
+              <div *ngFor="let member of members" class="col-2">
+                  <app-member-card [member]="member"></app-member-card>
+             </div>
+          </div>
+            <!-- <div class="list-group list-group-flush">
+
+              <a class="list-group-item list-group-item-action" [routerLink]="['/members/', member.userName]"
+                   routerLinkActive="router-link-active" *ngFor="let member of members">
+                <div class="media">
+                  <img alt="Image" src="{{member.photoUrl}}" class="avatar" />
+
+                  <div class="media-body">
+                    <div>
+                      <span class="text-muted text-small">{{member.city}}, {{member.country}}</span>
+                      <h5 class="h6 mb-1">{{member.userName}}
+                        <span *ngIf="(presence.onlineUsers$ | async).includes(member.userName)" class="badge badge-indicator badge-success">&nbsp;</span>
+                      </h5>
+                      <ul class="list-inline text-small text-muted">
+                        <li class="list-inline-item"><span class="badge badge-primary">{{member.age}}</span></li>
+                        <li class="list-inline-item"><span class="badge badge-primary">{{member.weight}}</span></li>
+                        <li class="list-inline-item">
+                          <small>Last Active: {{member.lastActive | date }}</small>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div> -->
+          </div>
+
+          <div class="d-flex justify-content-center" *ngIf="pagination">
+            <pagination
+              [boundaryLinks]="true"
+              [totalItems]="pagination?.totalItems"
+              [itemsPerPage]="pagination?.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;"
+              nextText="&rsaquo;"
+              firstText="&laquo;"
+              lastText="&raquo;">
+            </pagination>
+          </div>
+        </div>
+        <!--end of col-->
+        <div class="col-12 col-md-3 order-md-1">
+          <div class="card">
+            <div class="card-body">
+              <form form="ngForm" (ngSubmit)="loadMembers()" autocomplete="off">
+                <input class="form-control" placeholder="Search" type="search" name="search-conversations" />
+                <h5 class="mt-2">Filter By:</h5>
+                <h5 class="mt-2">Gender</h5>
+                <div class="checkbox">
+                  <label><input type="radio" value="male" name="gender" [(ngModel)]="userParams.gender"> Male</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="radio" value="female" name="gender" [(ngModel)]="userParams.gender"> Female</label>
+                </div>
+
+            <h5 class="card-title mt-2">Age range</h5>
+            <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="minAge">Min</label>
+              <input id="minAge" class="form-control" placeholder="18" type="number" name="minAge" [(ngModel)]="userParams.minAge">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="maxAge">Max</label>
+              <input id="maxAge" class="form-control" placeholder="99" type="number" name="maxAge"[(ngModel)]="userParams.maxAge">
+            </div>
+            </div> <!-- form-row.// -->
+            <button type="submit" class="btn btn-block btn-primary">Apply</button>
+            <button type="reset" class="btn btn-block btn-info" (click)="resetFilters()">Reset</button>
+          </form>
+            </div>
+          </div>
+          <!-- end card -->
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+  <!--end of section-->
+
+

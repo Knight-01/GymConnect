@@ -4,6 +4,14 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: "AIzaSyBxrnXgGKQwrakulaaQnw97AvpKYi_1FZU",
+    authDomain: "gymconnect-4a5b0.firebaseapp.com",
+    projectId: "gymconnect-4a5b0",
+    storageBucket: "gymconnect-4a5b0.appspot.com",
+    messagingSenderId: "693095167116",
+    appId: "1:693095167116:web:ab77995717122bc7a477a9"
+  },
   apiUrl: 'https://localhost:5001/api/',
   hubUrl: 'https://localhost:5001/hubs/'
 };

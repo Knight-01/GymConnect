@@ -21,7 +21,7 @@ export class MembersService {
   userParams: UserParams;
 
 
-  constructor(private http: HttpClient, private accountService: AccountService) { 
+  constructor(private http: HttpClient, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
       this.userParams = new UserParams(user);
@@ -58,8 +58,6 @@ export class MembersService {
   }
 
   getMember(username: string) {
-    // const member = this.members.find(x => x.username === username);
-    // if (member !== undefined) return of(member);
     const member = [...this.memberCache.values()]
     .reduce((arr, elem) => arr.concat(elem.result), [])
     .find((member: Member) => member.username === username);
@@ -87,6 +85,16 @@ export class MembersService {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
+  addInvite(username: string) {
+    return this.http.post(this.baseUrl + 'invite/' + username, {});
+  }
+
+  getInvites(predicate: string, pageNumber, pageSize) {
+    let params = getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'invite', params, this.http);
+  }
+
   addLike(username: string) {
     return this.http.post(this.baseUrl + 'likes/' + username, {});
   }
@@ -95,8 +103,7 @@ export class MembersService {
     let params = getPaginationHeaders(pageNumber, pageSize);
     params = params.append('predicate', predicate);
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params, this.http);
-    // return this.http.get<Partial<Member[]>>(this.baseUrl + 'likes?predicate=' + predicate);
   }
 
-  
+
 }

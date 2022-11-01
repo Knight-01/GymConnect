@@ -1,32 +1,37 @@
 <div class="row" *ngIf="member">
     <div class="col-4">
-       <h1>Your profile</h1> 
+       <h1>Your profile</h1>
     </div>
     <div class="col-8">
        <div class="alert alert info" *ngIf="editForm.dirty">
             <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
-       </div> 
+       </div>
     </div>
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" 
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
                 class="card-img-top img-thumbnail">
             <div class="card-body">
                 <div>
+                  <!-- <span class="text-small text-muted"><i class="icon-location"></i> {{member.city}}</span> -->
                    <strong>Location:</strong>
-                   <p>{{member.city}}, {{member.country}}</p> 
+                   <p>{{member.city}}, {{member.country}}</p>
                 </div>
                 <div>
                    <strong>Age:</strong>
-                   <p>{{member.age}}</p> 
+                   <p>{{member.age}}</p>
+                </div>
+                <div>
+                   <strong>Bmi:</strong>
+                   <p>{{member.bmi}}</p>
                 </div>
                 <div>
                    <strong>Last Active:</strong>
-                   <p>{{member.lastActive | timeago}}</p> 
+                   <p>{{member.lastActive | timeago}}</p>
                 </div>
                 <div>
                    <strong>Member since:</strong>
-                   <p>{{member.created | date: 'dd MMM yyyy'}}</p> 
+                   <p>{{member.created | date: 'dd MMM yyyy'}}</p>
                 </div>
                 <div class="card-footer">
                     <button [disabled]="!editForm.dirty" form="editForm" type="submit"  class="btn btn-success btn-block">Save Changes</button>
@@ -40,10 +45,10 @@
                 <form #editForm="ngForm" id="editForm"  (ngSubmit)="updateMember()">
                     <h4>Description</h4>
                     <textarea class="form-control"  [(ngModel)]="member.introduction"  name="introduction" rows="6"></textarea>
-                    <h4 class="mt-2">Looking for</h4>
-                    <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
-                    <h4 class="mt-2">Interests</h4>
-                    <textarea class="form-control" [(ngModel)]="member.interests" name="interests" rows="6"></textarea>
+                    <h4 class="mt-2">Workout Routine</h4>
+                    <textarea class="form-control" [(ngModel)]="member.workoutRoutine" name="lookingFor" rows="6"></textarea>
+                    <h4 class="mt-2">Dietary Plan</h4>
+                    <textarea class="form-control" [(ngModel)]="member.dietaryPlan" name="interests" rows="6"></textarea>
                     <h4 class="mt-2">Location Details: </h4>
                     <div class="form-inline">
                         <label for="city">City: </label>
@@ -52,7 +57,7 @@
                         <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
                     </div>
                 </form>
-                
+
             </tab>
             <tab heading="Edit Photos">
               <app-photo-editor [member]="member"></app-photo-editor>
@@ -60,11 +65,11 @@
         </tabset>
     </div>
 </div>
-               
-       
-          
 
-                      
-        
+
+
+
+
+
 
 

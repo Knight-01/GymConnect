@@ -1,7 +1,7 @@
 <div class="row" *ngIf="member">
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" 
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
                 class="card-img-top img-thumbnail">
             <div class="card-body">
                 <div class="mb-2" *ngIf="(presence.onlineUsers$ | async).includes(member.username)">
@@ -9,43 +9,47 @@
                 </div>
                 <div>
                    <strong>Location:</strong>
-                   <p>{{member.city}}, {{member.country}}</p> 
+                   <p>{{member.city}}, {{member.country}}</p>
                 </div>
                 <div>
                    <strong>Age:</strong>
-                   <p>{{member.age}}</p> 
+                   <p>{{member.age}}</p>
+                </div>
+                <div>
+                   <strong>Bmi:</strong>
+                   <p>{{member.bmi}}</p>
                 </div>
                 <div>
                    <strong>Last Active:</strong>
-                   <p>{{member.lastActive | timeago }}</p> 
+                   <p>{{member.lastActive | timeago }}</p>
                 </div>
                 <div>
                    <strong>Member since:</strong>
-                   <p>{{member.created | date: 'dd MMM yyyy'}}</p> 
+                   <p>{{member.created | date: 'dd MMM yyyy'}}</p>
                 </div>
                 <div class="card-footer">
                     <div class="btn-group d-flex">
-                        <button class="btn btn-primary">Like</button>
-                        <button (click)="selectTab(3)" class="btn btn-success">Message</button>
+                        <button (click)="addInvite(member)" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i></button>
+                        <button (click)="selectTab(3)" class="btn btn-success" ><i class="fa fa-envelope"></i></button>
                     </div>
                 </div>
 
             </div>
 
         </div>
-        
+
     </div>
     <div class="col-8">
         <tabset class="member-tabset" #memberTabs>
             <tab heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)">
                 <h4>Description</h4>
                 <p>{{member.introduction}}</p>
-                <h4>Looking for</h4>
-                <p>{{member.lookingFor}}</p>
+                <h4>Workout Routine</h4>
+                <p>{{member.workoutRoutine}}</p>
             </tab>
-            <tab heading='Interests' (selectTab)="onTabActivated($event)">
-                <h4>Interests</h4>
-                <p>{{member.interests}}</p>
+            <tab heading='Exercise Regimen' (selectTab)="onTabActivated($event)">
+                <h4>Dietary Plan</h4>
+                <p>{{member.dietaryPlan}}</p>
             </tab>
             <tab heading='Photos' (selectTab)="onTabActivated($event)">
                 <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"

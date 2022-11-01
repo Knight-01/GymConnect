@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
@@ -16,13 +16,15 @@ export class RegisterComponent implements OnInit {
   maxDate: Date;
   validationErrors: string[] = [];
 
-  constructor(private accountService: AccountService, private toastr: ToastrService,
-    private fb: FormBuilder, private router: Router ) { }
+  constructor(private accountService: AccountService,
+     private toastr: ToastrService,
+     private fb: FormBuilder,
+     private router: Router ) { }
 
   ngOnInit(): void {
     this.initializeForm();
-    this.maxDate = new Date();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() -18);
+    // this.maxDate = new Date();
+    // this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   initializeForm() {
@@ -31,9 +33,11 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
+      height: ['', Validators.required],
+      weight: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, 
+      password: ['', [Validators.required,
         Validators.minLength(4),Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]]
     })
@@ -44,23 +48,25 @@ export class RegisterComponent implements OnInit {
 
   matchValues(matchTo: string): ValidatorFn {
     return (control: AbstractControl) => {
-      return control?.value === control?.parent?.controls[matchTo].value 
+      return control?.value === control?.parent?.controls[matchTo].value
         ? null : {isMatching: true}
     }
   }
 
-  
+
   register() {
-    // console.log(this.registerForm.value);
     this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/members');
+      this.router.navigateByUrl('/onboard');
+      this.toastr.success("You are registered!");
     }, error => {
       this.validationErrors = error;
+      this.toastr.warning(error.error, "Error!")
     })
   }
 
   cancel() {
     this.cancelRegister.emit(false);
+    this.router.navigateByUrl('/');
   }
 
 }

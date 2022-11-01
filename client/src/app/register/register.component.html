@@ -1,4 +1,14 @@
 <!-- <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off"> -->
+
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="./assets/img/RegisterImage2.jpg"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+
 <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <h2 class="text-center text-primary">Sign up</h2>
     <hr>
@@ -11,23 +21,28 @@
             <input type="radio" value='female' formControlName='gender' class="ml-3"> Female
         </label>
 </div>
-<app-text-input [formControl]='registerForm.controls["username"]'
+<div id="container">
+<app-text-input id="center"  [formControl]='registerForm.controls["username"]'
     [label]='"Username"'></app-text-input>
-<app-text-input [formControl]='registerForm.controls["knownAs"]'
+<!-- <app-text-input [formControl]='registerForm.controls["knownAs"]'
     [label]='"Known As"'></app-text-input>
 <app-date-input [formControl]='registerForm.controls["dateOfBirth"]'
     [label]='"Date Of Birth"' [maxDate]='maxDate'></app-date-input>
+<app-text-input [formControl]='registerForm.controls["height"]'
+    [label]='"Height in metres"'></app-text-input>
+<app-text-input [formControl]='registerForm.controls["weight"]'
+    [label]='"Weight in kgs"'></app-text-input>
 <app-text-input [formControl]='registerForm.controls["city"]'
     [label]='"City"'></app-text-input>
 <app-text-input [formControl]='registerForm.controls["country"]'
-    [label]='"Country"'></app-text-input>
+    [label]='"Country"'></app-text-input> -->
 <app-text-input [formControl]='registerForm.controls["password"]'
     [label]='"Password"' [type]='"password"' autocomplete="new-password">
 </app-text-input>
 <app-text-input [formControl]='registerForm.controls["confirmPassword"]'
     [label]='"Confirm Password"'
     [type]='"password"' autocomplete="new-password"></app-text-input>
-
+</div>
  <div class="row" *ngIf="validationErrors.length > 0">
      <ul class="text-danger">
          <li *ngFor="let error of validationErrors">
@@ -41,6 +56,7 @@
         <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
     </div>
 </form>
+
 
 <!-- <p>Form value: {{registerForm.value | json}}</p>
 <p>Form status: {{registerForm.status | json}}</p> -->

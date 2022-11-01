@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,11 @@ import { PresenceService } from './_services/presence.service';
 export class AppComponent implements OnInit {
   title = 'Gym Connect';
   users: any;
-  
+  faCoffee = faCoffee;
+
   constructor(private accountService: AccountService, private presence: PresenceService) {}
 
-
   ngOnInit(): void {
-  
     this.setCurrentUser();
   }
 
@@ -27,8 +26,9 @@ export class AppComponent implements OnInit {
       this.accountService.setCurrentUser(user);
       this.presence.createHubConnection(user);
     }
-  
+
   }
 
-
 }
+
+

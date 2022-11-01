@@ -1,0 +1,55 @@
+<!-- <!-- <div class="col-12 col-sm-8 col-lg-6 fullwidth-split-text">
+  <div class="col-12 col-lg-8 align-self-center">
+    <div class="text-center mb-3">
+      <h1 class="h2 mb-2">Get started</h1>
+      <span>Start working out with others immediately!</span>
+    </div> -->
+    <form
+      class="mb-4"
+      [formGroup]="registerForm"
+      (ngSubmit)="register()"
+    >
+      <div class="form-group">
+        <label for="signup-email">Username</label>
+        <app-text-input [formControl]="registerForm.controls['username']" [label]='"Username"'></app-text-input>
+      </div>
+      <div class="form-group">
+        <label for="signup-password">Choose a password</label>
+        <app-text-input [formControl]="registerForm.controls['password']" [label]='"Password"' [type]="'password'"></app-text-input>
+      </div>
+      <div class="form-group">
+        <label for="signup-email">Confirm Password</label>
+        <app-text-input [formControl]="registerForm.controls['confirmPassword']" [label]='"Confirm Password"' [type]="'password'"></app-text-input>
+      </div>
+      <div>
+        <div class="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            value="agree"
+            name="agree-terms"
+            id="check-agree"
+          />
+          <label
+            class="custom-control-label text-small"
+            for="check-agree"
+            >I agree to the <a href="#">Terms &amp; Conditions</a>
+          </label>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-lg btn-success">
+          Create Account
+        </button>
+      </div>
+    </form>
+    <!-- <div class="text-center">
+      <span class="text-small"
+        >Already have an account? <a href="#">Log in here</a>
+      </span>
+    </div>
+  </div>
+  <!-end of col-->
+<!-- </div> -->
+
+

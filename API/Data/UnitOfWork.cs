@@ -21,6 +21,8 @@ namespace API.Data
 
          public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
 
+        public IInviteRepository InviteRepository => new InviteRepository(_context);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

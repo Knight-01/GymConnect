@@ -1,4 +1,3 @@
-using System.Linq;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -79,6 +78,12 @@ namespace API.Data
 
         }
 
+        public async Task<AppUser> GetUserByUsername(string username)
+        {
+            return await _context.Users.Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.UserName == username);
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
@@ -99,6 +104,11 @@ namespace API.Data
             return await _context.Users
                 .Include(p => p.Photos)
                 .ToListAsync();
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(AppUser user)

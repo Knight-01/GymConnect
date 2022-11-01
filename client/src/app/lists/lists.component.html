@@ -1,14 +1,13 @@
 <div class="text-center mt-3">
-    <h2>{{predicate === 'liked' ? 'Members I like' : 'Members who like me'}}</h2>
+    <h2>{{predicate === 'liked' ? 'Likes' : 'Liked by'}}</h2>
 </div>
-
 <div class="container mt-3">
-    <div class="row mt-3">
+    <div class="row">
         <div class="btn-group" name="predicate">
             <button class="btn btn-primary" btnRadio="liked"
-                [(ngModel)]="predicate" (click)="loadLikes()">Members I like</button>
+                [(ngModel)]="predicate" (click)="loadLikes()">Likes</button>
             <button class="btn btn-primary" btnRadio="likedBy"
-                [(ngModel)]="predicate" (click)="loadLikes()">Members who like me</button>
+                [(ngModel)]="predicate" (click)="loadLikes()">Liked by</button>
         </div>
     </div>
     <div class="row mt-3">
@@ -32,3 +31,143 @@
     </pagination>
 <div>
 
+
+ <div class="main-container">
+  <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item"><a href="pages-app.html">App Pages</a>
+            </li>
+
+            <li class="breadcrumb-item active" aria-current="page">Collection - Table</li>
+          </ol>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </nav>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <h1 class="h2 mb-2">Invites</h1>
+          <span>See who has invited you to workout.</span>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+  <!--end of section-->
+  <section class="flush-with-above">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <span class="text-muted text-small">Results 1 - 8 of 8</span>
+            </div>
+            <form class="d-flex align-items-center" form="ngForm" (change)="loadInvites()">
+              <span class="mr-2 text-muted text-small text-nowrap">Sort by:</span>
+              <select class="custom-select" name="predicate" [(ngModel)]="predicate">
+                <option value="invites" selected>Invites</option>
+                <option value="invitedBy">Invited By</option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+      <div class="row">
+        <div class="col">
+          <table class="table table-borderless table-hover align-items-center">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+                <th scope="col">Date Added</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let member of members" [routerLink]="['/members', member.username]"
+            routerLinkActive="router-link-active">
+              <tr class="bg-white">
+                <th scope="row">
+                  <a class="media align-items-center">
+                    <app-member-card [member]="member"></app-member-card>
+                    <!-- <img alt="Image" src="{{member.photoUrl}}" class="avatar rounded avatar-sm" /> -->
+                    <div class="media-body">
+                      <span class="h6 mb-0">{{member.username}}</span>
+                      <span class="text-muted">{{member.city}}</span>
+                    </div>
+                  </a>
+                </th>
+                <td>Lucy</td>
+                <td>13/10/2022</td>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow"
+                            type="button"
+                            id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="icon-dots-three-horizontal"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-sm">
+                      <a class="dropdown-item" href="#">Download</a>
+                      <a class="dropdown-item" href="#">Share</a>
+                      <a class="dropdown-item" href="#">Comment</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="table-divider">
+                <th></th>
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+  <!--end of section-->
+  <!-- <footer class="footer-short">
+    <div class="container">
+      <hr>
+      <nav class="row justify-content-between align-items-center">
+        <div class="col-auto">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a href="#">
+                <img alt="Image" src="assets/img/logo-gray.svg" />
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Overview</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Documentation</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Changelog</a>
+            </li>
+          </ul>
+        </div>
+       -->

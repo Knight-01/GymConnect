@@ -69,6 +69,9 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("DietaryPlan")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -79,8 +82,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Interests")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Height")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Introduction")
                         .HasColumnType("TEXT");
@@ -95,9 +98,6 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LookingFor")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
@@ -125,6 +125,12 @@ namespace API.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("WorkoutRoutine")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -250,6 +256,21 @@ namespace API.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("API.Entities.UserInvite", b =>
+                {
+                    b.Property<int>("SourceUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("InvitedUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SourceUserId", "InvitedUserId");
+
+                    b.HasIndex("InvitedUserId");
+
+                    b.ToTable("Invites");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -407,6 +428,25 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.UserInvite", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "InvitedUser")
+                        .WithMany("InvitedByUsers")
+                        .HasForeignKey("InvitedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "SourceUser")
+                        .WithMany("InvitedUsers")
+                        .HasForeignKey("SourceUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InvitedUser");
+
+                    b.Navigation("SourceUser");
+                });
+
             modelBuilder.Entity("API.Entities.UserLike", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "LikedUser")
@@ -469,6 +509,10 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("InvitedByUsers");
+
+                    b.Navigation("InvitedUsers");
+
                     b.Navigation("LikedByUsers");
 
                     b.Navigation("LikedUsers");

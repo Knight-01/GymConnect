@@ -13,7 +13,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  
+
 
   constructor(private http: HttpClient, private presence: PresenceService) { }
 
@@ -33,7 +33,7 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {
-          this.setCurrentUser(user);        
+          this.setCurrentUser(user);
           this.presence.createHubConnection(user);
         }
       })
@@ -50,6 +50,17 @@ export class AccountService {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
+  }
+
+  onboardUser(user: User) {
+    return this.http.put(this.baseUrl + 'users/onboard/', user).pipe(
+      map((user: User) => {
+        if (user) {
+          this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
+        }
+      })
+    )
   }
 
   getDecodedToken(token: string) {

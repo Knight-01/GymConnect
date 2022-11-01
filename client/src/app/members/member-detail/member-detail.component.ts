@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
@@ -24,14 +25,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
   activeTab: TabDirective;
   messages: Message[] = [];
   user: User;
-  
+
 
   constructor(public presence: PresenceService, private memberService: MembersService, private route: ActivatedRoute,
-     private messageService: MessageService, private accountService: AccountService, private router: Router) {
+     private messageService: MessageService, private accountService: AccountService, private router: Router, private toastr: ToastrService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       }
-  
+
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
@@ -81,7 +82,22 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
       this.memberTabs.tabs[tabId].active = true;
     }
   }
-  
+
+  addInvite(member: Member) {
+    this.memberService.addInvite(member.username).subscribe(() => {
+      this.toastr.success("You have invited " + this.member.knownAs);
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  // addInvite(member: Member) {
+  //   this.memberService.addInvite(member.username).subscribe(() => {
+  //     this.toastr.success('You have invited ' + member.knownAs);
+  //   }, error => {
+  //     this.toastr.error(error);
+  //   })
+  // }
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
