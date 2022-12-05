@@ -13,3 +13,8 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+section article {margin: 0 auto;}
+.content {
+  min-height: calc(100vh - 120px);
+  /* 80px header + 40px footer = 120px  */
+}

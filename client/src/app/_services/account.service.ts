@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IpAddress } from '../_models/ipaddress';
 import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
 
@@ -13,6 +14,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
+  apiUrl = environment.apiInfoUrl;
 
 
   constructor(private http: HttpClient, private presence: PresenceService) { }
@@ -66,4 +68,25 @@ export class AccountService {
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]))
   }
+
+  getIPAddress(): Observable<IpAddress> {
+    return this.http.get<IpAddress>(this.apiUrl);
+  }
+
+  public isLoggedIn() : Observable<boolean> {
+    return this.currentUser$.pipe(map(user => {
+      if (user) return true;
+
+      return false;
+    }))
+  }
+
+  private currentUser(username: string) : Observable<boolean> {
+    return this.currentUser$.pipe(map(user => {
+      if (user.username == username) return true;
+
+      return false;
+    }))
+  }
+
 }

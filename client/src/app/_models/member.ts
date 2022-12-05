@@ -5,6 +5,7 @@ export interface Member {
     username: string
     photoUrl: string
     age: number
+    dateOfBirth: Date
     height: number
     weight: number
     bmi: number

@@ -1,0 +1,12 @@
+.media-body{
+  /* other base styles go here */
+  display:flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}

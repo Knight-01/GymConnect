@@ -44,12 +44,19 @@ namespace API
             services.AddCors();
             services.AddIdentityServices(_config);
             services.AddSignalR();
+            services.AddAuthentication().AddGoogle(googleOptions => 
+            {
+                googleOptions.ClientId = _config["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = _config["Authentication:Google:ClientSecret"];
+            });
+            
             
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -75,11 +82,15 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

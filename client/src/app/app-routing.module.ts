@@ -11,18 +11,18 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
-import { OnboardComponent } from './onboard/onboard.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
+  { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'invites', component: InvitesComponent},
-  { path: 'onboard', component: OnboardComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

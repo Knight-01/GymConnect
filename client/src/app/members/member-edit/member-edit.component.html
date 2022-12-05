@@ -1,72 +1,558 @@
 <div class="row" *ngIf="member">
-    <div class="col-4">
-       <h1>Your profile</h1>
-    </div>
-    <div class="col-8">
-       <div class="alert alert info" *ngIf="editForm.dirty">
-            <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
-       </div>
-    </div>
-    <div class="col-4">
-        <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
-                class="card-img-top img-thumbnail">
-            <div class="card-body">
-                <div>
-                  <!-- <span class="text-small text-muted"><i class="icon-location"></i> {{member.city}}</span> -->
-                   <strong>Location:</strong>
-                   <p>{{member.city}}, {{member.country}}</p>
-                </div>
-                <div>
-                   <strong>Age:</strong>
-                   <p>{{member.age}}</p>
-                </div>
-                <div>
-                   <strong>Bmi:</strong>
-                   <p>{{member.bmi}}</p>
-                </div>
-                <div>
-                   <strong>Last Active:</strong>
-                   <p>{{member.lastActive | timeago}}</p>
-                </div>
-                <div>
-                   <strong>Member since:</strong>
-                   <p>{{member.created | date: 'dd MMM yyyy'}}</p>
-                </div>
-                <div class="card-footer">
-                    <button [disabled]="!editForm.dirty" form="editForm" type="submit"  class="btn btn-success btn-block">Save Changes</button>
-                </div>
-            </div>
+<div class="main-container">
+  <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#!" routerLink="/members/{{member.username}}">Profile</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Account Settings
+            </li>
+          </ol>
         </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
     </div>
-    <div class="col-8">
-        <tabset class="member-tabset">
-            <tab heading="About {{member.knownAs}}">
-                <form #editForm="ngForm" id="editForm"  (ngSubmit)="updateMember()">
-                    <h4>Description</h4>
-                    <textarea class="form-control"  [(ngModel)]="member.introduction"  name="introduction" rows="6"></textarea>
-                    <h4 class="mt-2">Workout Routine</h4>
-                    <textarea class="form-control" [(ngModel)]="member.workoutRoutine" name="lookingFor" rows="6"></textarea>
-                    <h4 class="mt-2">Dietary Plan</h4>
-                    <textarea class="form-control" [(ngModel)]="member.dietaryPlan" name="interests" rows="6"></textarea>
-                    <h4 class="mt-2">Location Details: </h4>
-                    <div class="form-inline">
-                        <label for="city">City: </label>
-                        <input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2">
-                        <label for="city">Country: </label>
-                        <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
-                    </div>
-                </form>
+    <!--end of container-->
+  </nav>
+  <section class="bg-white space-sm pb-4">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-auto">
+          <h1 class="h2">Account Settings</h1>
+        </div>
+        <!--end of col-->
+        <div class="col-auto text-right">
+          <a href="/" onclick="return false;" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Available soon">Upgrade to Pro</a>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+  <!--end of section-->
+  <section class="flush-with-above space-0">
+    <div class="bg-white">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <tabset class="member-tabset">
+            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist"> -->
+              <tab heading="General">
+              <!-- <li class="nav-item"> -->
+                <a
+                  class="nav-link active"
+                  id="overview-tab"
+                  data-toggle="tab"
+                  href="#general"
+                  role="tab"
+                  aria-selected="true"
+                  ></a
+                >
+              <!-- </li> -->
+             </tab>
+              <tab heading="Edit Photos">
+                <app-photo-editor [member]="member"></app-photo-editor>
+              <!-- <li class="nav-item"> -->
+                <a
+                  class="nav-link"
+                  id="photo-tab"
+                  data-toggle="tab"
+                  href="#photo"
+                  role="tab"
+                  aria-selected="false"
+                  ></a
+                >
+              <!-- </li> -->
+              </tab>
+              <!-- <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="security-tab"
+                  data-toggle="tab"
+                  href="#security"
+                  role="tab"
+                  aria-selected="false"
+                  >Security</a
+                >
+              </li> -->
+              <!-- <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="notifications-tab"
+                  data-toggle="tab"
+                  href="#notifications"
+                  role="tab"
+                  aria-selected="false"
+                  >Notifications</a
+                >
+              </li> -->
+            <!-- </ul> -->
+            </tabset>
+          </div>
+          <!--end of col-->
+        </div>
+        <!--end of row-->
+      </div>
+      <!--end of container-->
+    </div>
+  </section>
 
-            </tab>
-            <tab heading="Edit Photos">
+  <section class="flush-with-above height-80 d-block">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="general" role="tabpanel">
+        <div class="container">
+          <!--end of row-->
+          <div class="row mb-4">
+            <div class="col">
+              <h5>Account Details</h5>
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <div class="row">
+            <div class="col-12 col-md-4 order-md-2">
+              <div
+                *ngIf="editForm.dirty"
+                class="alert alert-info text-small"
+                role="alert"
+              >
+                <span>
+                  You have made changes. Any unsaved changes will be lost.
+                </span>
+              </div>
+            </div>
+            <!--end of col-->
+            <div class="col-12 col-md-8 order-md-1">
+              <form #editForm="ngForm" (ngSubmit)="updateMember()" class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="first-name"
+                      >Date of Birth:
+                      <span class="text-red">*</span>
+                    </label>
+                    <!-- <app-date-input [(ngModel)]="member.dateOfBirth" class="form-control form-control-lg" type="date" name="dateOfBirth" id="dateOfBirth"></app-date-input> -->
+                    <input
+                      class="form-control form-control-lg"
+                      type="date"
+                      name="dateOfBirth"
+                      [(ngModel)]="member.dateOfBirth"
+                      id="first-name"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="last-name">Gender:</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="gender"
+                      [(ngModel)]="member.gender"
+                      id="last-name"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="username"
+                      >Username:
+                      <span class="text-red">*</span>
+                    </label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="knownAs"
+                      [(ngModel)]="member.knownAs"
+                      id="knownAs"
+                    />
+                    <small>This will be displayed on your public profile</small>
+                  </div>
+                </div>
+                <!-- <div class="col-12">
+                  <div class="form-group">
+                    <label for="emailaddress"
+                      >Email Address:
+                      <span class="text-red">*</span>
+                    </label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="email"
+                      name="emailAddress"
+                      [(ngModel)]="member.email"
+                      id="emailaddress"
+                    />
+                    <small>Used to log in to your account</small>
+                  </div>
+                </div> -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="about-me">Introduction:</label>
+                    <textarea
+                      class="form-control form-control-lg"
+                      name="introduction"
+                      rows="4"
+                      [(ngModel)]="member.introduction"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="about-me">Workout Routine:</label>
+                    <textarea
+                      class="form-control form-control-lg"
+                      name="workoutRoutine"
+                      rows="4"
+                      [(ngModel)]="member.workoutRoutine"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="about-me">Dietary Plan:</label>
+                    <textarea
+                      class="form-control form-control-lg"
+                      name="dietaryPlan"
+                      rows="4"
+                      [(ngModel)]="member.dietaryPlan"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="city">City:</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="city"
+                      [(ngModel)]="member.city"
+                      id="city"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="country"
+                      [(ngModel)]="member.country"
+                      id="country"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="height">Height:</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="height"
+                      [(ngModel)]="member.height"
+                      placeholder="Cm"
+                      id="height"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      name="weight"
+                      [(ngModel)]="member.weight"
+                      placeholder="Kg"
+                      id="weight"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <button
+                      [disabled]="!editForm.dirty"
+                      class="btn btn-primary"
+                      type="submit"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <!--end of col-->
+            <div class="col-12 col-md-8 order-md-1"></div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </div>
+      <!--end of tab pane-->
+      <div class="tab-pane fade" id="photo-tab" role="tab">
+        <div class="container">
+          <div class="row mb-4">
+            <!-- <div class="col">
+              <h5>Add/Edit Photos</h5>
               <app-photo-editor [member]="member"></app-photo-editor>
-            </tab>
-        </tabset>
+            </div> -->
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <div class="row">
+            <!-- <app-photo-editor
+              [photos]="user.photos"
+              (getMemberPhotoChange)="updateMainPhoto($event)"
+            ></app-photo-editor> -->
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </div>
+      <!--end of tab pane-->
+      <div class="tab-pane fade" id="notifications" role="tabpanel">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="alert alert-info text-small mb-0" role="alert">
+                <i class="icon-shield"></i>
+                <span>
+                  We will never distribute your email address to third parties.
+                  Read about email communication in our privacy policy.
+                </span>
+                <a href="#">View privacy policy &rsaquo;</a>
+              </div>
+            </div>
+            <!--end of col-->
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <form>
+                <h5 class="mb-4">Notification Preferences</h5>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-mention"
+                      checked
+                      id="notify-mention"
+                    />
+                    <label class="custom-control-label" for="notify-mention"
+                      >Someone mentions me</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-request"
+                      checked
+                      id="notify-follow"
+                    />
+                    <label class="custom-control-label" for="notify-follow"
+                      >Someone follows me</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-share"
+                      checked
+                      id="notify-share"
+                    />
+                    <label class="custom-control-label" for="notify-share"
+                      >Someone shares my activty</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-message"
+                      checked
+                      id="notify-message"
+                    />
+                    <label class="custom-control-label" for="notify-message"
+                      >Someone messages me</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-adds"
+                      checked
+                      id="notify-adds"
+                    />
+                    <label class="custom-control-label" for="notify-adds"
+                      >Someone adds me to a project</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      name="notify-sales"
+                      id="notify-sales"
+                    />
+                    <label class="custom-control-label" for="notify-sales"
+                      >Sales and promotions</label
+                    >
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-secondary mt-4" disabled>
+                  Update preferences
+                </button>
+              </form>
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <hr />
+          <div class="row">
+            <div class="col-12">
+              <form>
+                <h5>Notification Frequency</h5>
+                <div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="notify-daily"
+                      type="radio"
+                      class="custom-control-input"
+                      value="notify-daily"
+                      name="notify-frequency"
+                    />
+                    <label class="custom-control-label" for="notify-daily"
+                      >Daily</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="notify-weekly"
+                      type="radio"
+                      class="custom-control-input"
+                      value="notify-weekly"
+                      name="notify-frequency"
+                      checked
+                    />
+                    <label class="custom-control-label" for="notify-weekly"
+                      >Weekly</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="notify-monthly"
+                      type="radio"
+                      class="custom-control-input"
+                      value="notify-monthly"
+                      name="notify-frequency"
+                    />
+                    <label class="custom-control-label" for="notify-monthly"
+                      >Monthly</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="notify-never"
+                      type="radio"
+                      class="custom-control-input"
+                      value="notify-never"
+                      name="notify-frequency"
+                    />
+                    <label class="custom-control-label" for="notify-never"
+                      >Never</label
+                    >
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-secondary mt-4" disabled>
+                  Update frequency
+                </button>
+              </form>
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </div>
     </div>
+    <!--end of tabs content-->
+  </section>
+  <!--end of section-->
+  <footer class="footer-short">
+    <div class="container">
+      <hr />
+      <nav class="row justify-content-between align-items-center">
+        <div class="col-auto">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a href="#">
+                <img alt="Image" src="assets/img/logo-gray.svg" />
+              </a>
+            </li>
+            <!-- <li class="list-inline-item">
+              <a href="#">Overview</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Documentation</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Changelog</a>
+            </li> -->
+          </ul>
+        </div>
+        <!--end of col-->
+        <div class="col-auto text-sm-right">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a href="#"><i class="socicon-github"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#"><i class="socicon-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+        <!--end of col-->
+      </nav>
+      <!--end of row-->
+      <div class="row">
+        <div class="col">
+          <small>&copy; 2022 All Rights Reserved</small>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </footer>
 </div>
-
-
 
 
 

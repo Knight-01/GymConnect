@@ -16,19 +16,22 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   member: Member;
   user: User;
+  maxDate: Date;
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
       $event.returnValue = true;
     }
   }
 
-  constructor(private accountService: AccountService, private memberService: MembersService, 
-    private toastr: ToastrService) { 
+  constructor(private accountService: AccountService, private memberService: MembersService,
+    private toastr: ToastrService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
     this.loadMember();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   loadMember() {
@@ -40,9 +43,9 @@ export class MemberEditComponent implements OnInit {
   updateMember() {
     this.memberService.updateMember(this.member).subscribe(() => {
       this.toastr.success('Profile updated successfully!');
-      this.editForm.reset(this.member);  
+      this.editForm.reset(this.member);
     })
- 
+
   }
 
 }

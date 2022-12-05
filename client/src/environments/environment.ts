@@ -13,7 +13,8 @@ export const environment = {
     appId: "1:693095167116:web:ab77995717122bc7a477a9"
   },
   apiUrl: 'https://localhost:5001/api/',
-  hubUrl: 'https://localhost:5001/hubs/'
+  hubUrl: 'https://localhost:5001/hubs/',
+  apiInfoUrl: 'https://ipinfo.io?token=b91cc14ac4eaa6'
 };
 
 /*

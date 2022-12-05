@@ -33,12 +33,15 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
-import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
-import { AuthConfigModule } from './auth/auth-config.module';
+import { AuthModule } from 'angular-auth-oidc-client';
 import { OnboardComponent } from './onboard/onboard.component';
 import { LoginComponent } from './login/login.component';
 import { InvitesComponent } from './invites/invites.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ProfileComponent } from './profile/profile.component';
+
+
 
 @NgModule({
   declarations: [
@@ -68,22 +71,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     OnboardComponent,
     LoginComponent,
     InvitesComponent,
+    ResetPasswordComponent,
+    ProfileComponent,
   ],
 
   imports: [
-    // AuthModule.forRoot({
-    //   config: {
-    //     authority: 'https://localhost:5002',
-    //     redirectUrl: window.location.origin,
-    //     postLogoutRedirectUri: window.location.origin,
-    //     clientId: 'angular',
-    //     scope: 'openid scope1',
-    //     responseType: 'code',
-    //     silentRenew: true,
-    //     useRefreshToken: true,
-    //     logLevel: LogLevel.Debug,
-    //   },
-    // }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -92,7 +84,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule,
-    AuthConfigModule,
     AuthModule,
     FontAwesomeModule,
   ],

@@ -14,6 +14,7 @@ namespace API.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
+          // AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         // public DbSet<AppUser> Users { get; set; }
@@ -23,6 +24,11 @@ namespace API.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+
+    //     static DataContext()
+    // {
+    //     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    // }
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
@@ -53,7 +59,7 @@ namespace API.Data
                 .HasOne(s => s.LikedUser)
                 .WithMany(l => l.LikedByUsers)
                 .HasForeignKey(s => s.LikedUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<UserInvite>()
                 .HasKey(k => new {k.SourceUserId, k.InvitedUserId});
@@ -62,7 +68,7 @@ namespace API.Data
                 .HasOne(s => s.SourceUser)
                 .WithMany(i => i.InvitedUsers)
                 .HasForeignKey(s => s.SourceUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<UserInvite>()
                 .HasOne(s => s.InvitedUser)

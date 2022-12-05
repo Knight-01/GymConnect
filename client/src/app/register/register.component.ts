@@ -11,7 +11,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() cancelRegister = new EventEmitter();
+  @Output() cancel = new EventEmitter();
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    // this.maxDate = new Date();
-    // this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   initializeForm() {
@@ -33,8 +33,9 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
+      // description: [''],
+      // height: ['', Validators.required],
+      // weight: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
       password: ['', [Validators.required,
@@ -55,8 +56,8 @@ export class RegisterComponent implements OnInit {
 
 
   register() {
-    this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/onboard');
+    this.accountService.register(this.registerForm.value).subscribe(() => {
+      // this.router.navigateByUrl('/onboard');
       this.toastr.success("You are registered!");
     }, error => {
       this.validationErrors = error;
@@ -64,8 +65,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  cancel() {
-    this.cancelRegister.emit(false);
+  cancelRegister() {
+    this.cancel.emit(false);
     this.router.navigateByUrl('/');
   }
 

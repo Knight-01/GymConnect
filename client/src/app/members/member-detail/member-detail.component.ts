@@ -18,8 +18,8 @@ import { PresenceService } from 'src/app/_services/presence.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit, OnDestroy{
-  @ViewChild('memberTabs') memberTabs: TabsetComponent;
-  member: Member;
+  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
+  member: Member = {} as Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   activeTab: TabDirective;
@@ -35,7 +35,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.member = data.member;
+      this.member = data.member = data['member']
     })
 
     this.route.queryParams.subscribe(params => {
@@ -91,13 +91,11 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
     })
   }
 
-  // addInvite(member: Member) {
-  //   this.memberService.addInvite(member.username).subscribe(() => {
-  //     this.toastr.success('You have invited ' + member.knownAs);
-  //   }, error => {
-  //     this.toastr.error(error);
-  //   })
-  // }
+  addLike(member: Member) {
+    this.memberService.addLike(member.username).subscribe(() => {
+      this.toastr.success("You have liked " + this.member.knownAs);
+    })
+  }
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;

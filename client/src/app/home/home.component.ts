@@ -4,24 +4,27 @@ import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // email: string = '';
-  // password: string = '';
   registerMode = false;
+  user: any;
+  loggedIn: boolean;
   faCoffee = faCoffee;
   model: any = {};
   demo: any = {username: "lisa", password: "Pa$$w0rd"}
+
+
   constructor(public accountService: AccountService,
     private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+
   }
+
 
   registerToggle(){
     this.registerMode = !this.registerMode;
@@ -31,35 +34,15 @@ export class HomeComponent implements OnInit {
     this.registerMode = event;
   }
 
+
   login() {
     this.accountService.login(this.model).subscribe(response => {
-      this.router.navigateByUrl('/members');
-      this.toastr.success('You are logged in', 'Congratulations!')
+      this.router.navigate(['/members']);
+      this.toastr.success('You are logged in', 'Welcome!')
     }, error => {
       console.log(error);
     })
   }
-
-  // signInWithGoogle() {
-  //   this.auth.googleSignIn();
-  // }
-
-  // login() {
-  //   if (this.email == '') {
-  //     alert('Please enter email');
-  //     return;
-  //   }
-
-  //   if (this.password == '') {
-  //     alert('Please enter password');
-  //     return;
-  //   }
-
-  //   this.auth.login(this.email, this.password);
-
-  //   this.email = '';
-  //   this.password = '';
-  // }
 
   demoLogin() {
     this.accountService.login(this.demo).subscribe(response => {
@@ -75,4 +58,5 @@ export class HomeComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/');
   }
+
 }

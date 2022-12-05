@@ -1,3 +1,357 @@
+
+<div class="main-container">
+  <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+      <div class="col">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/" onclick="return false;">Home</a>
+        </li>
+        <li class="breadcrumb-item"><a href="#!">Login</a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Wizard Onboarding</li>
+      </ol>
+    </div>
+    <!--end of col-->
+  </div>
+
+  <!--end of row-->
+</div>
+</nav>
+
+<div class="container mt-2">
+  <div id="stepper1" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Account Setup</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Upload Picture</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Body Specification</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <form [formGroup]="onBoardForm" (ngSubmit)="onBoardUpdate()" autocomplete="off">
+        <div id="test-l-1" class="content">
+          <div class="row align-items-center mb-3">
+            <div class="col-12 col-md-7">
+              <h6 class="title-decorative">Step One</h6>
+              <h3 class="h1">Create your account</h3>
+              <span class="lead"
+                >Let's begin by creating your account. You can always change
+                these details later</span
+              >
+            </div>
+            <!--end of col-->
+
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+
+        <div class="form-row form-group">
+            <div class="col">
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="city"
+                name="city"
+                formControlName="city"
+                placeholder="City"
+              />
+            </div>
+            <div class="col">
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="country"
+                name="country"
+                formControlName="country"
+                placeholder="Country"
+              />
+            </div>
+          </div>
+          <!-- <div class="form-row form-group">
+            <div class="col">
+              <input class="form-control form-control-lg"
+                     type="text"
+                     id="dateOfBirth"
+                     name="dateOfBirth"
+                     formControlName="dateOfBirth"
+                     placeholder="Date of Birth">
+            </div>
+          </div> -->
+          </div>
+          <div class="form-row form-group">
+            <div class="col">
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="knownAs"
+                name="knownAs"
+                formControlName="knownAs"
+                placeholder="KnownAs"
+              />
+              <small>This name will be on your public profile</small>
+              <!-- <select
+                class="form-control"
+                formControlName="gender"
+                id="exampleFormControlSelect1"
+                placeholder="Gender"
+                name="gender"
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select> -->
+            </div>
+          </div>
+          <button (click)="next()" type="button" class="btn btn-primary">
+            Next
+          </button>
+
+
+        <div id="test-l-2" class="content">
+          <div class="col-12 col-md-7">
+            <h6 class="title-decorative">Step Two</h6>
+            <h3 class="h1">Upload a picture</h3>
+            <span class="lead"
+              >Add some detail to your profile to personalise it and let others
+              know who you are</span
+            >
+          </div>
+          <!-- <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+              </div>
+
+              <div class="col-md-9" style="margin-bottom: 40px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="50%">Name</th>
+                      <th>Size</th>
+                      <th>Progress</th>
+
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of uploader.queue">
+                      <td>
+                        <strong>{{ item?.file?.name }}</strong>
+                      </td>
+                      <td *ngIf="uploader.options.isHTML5" nowrap>
+                        {{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB
+                      </td>
+                      <td *ngIf="uploader.options.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                          <div
+                            class="progress-bar"
+                            role="progressbar"
+                            [ngStyle]="{ width: item.progress + '%' }"
+                          ></div>
+                        </div>
+                      </td>
+
+                      <td nowrap>
+                        <button
+                          type="button"
+                          class="btn btn-success btn-xs"
+                          (click)="item.upload()"
+                          [disabled]="
+                            item.isReady || item.isUploading || item.isSuccess
+                          "
+                        >
+                          <span class="glyphicon glyphicon-upload"></span>
+                          Upload
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <br /><br />
+
+          <!-- <div>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="box-2">
+              <label class="custom-control-label" for="box-2">Make profile public</label>
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  {{ response }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="about-me">Description:</label>
+            <textarea rows="4" class="form-control form-control-lg" id="about-me"></textarea>
+            <small>Tell us a little about yourself</small>
+          </div>
+
+
+          <button (click)="next()" type="button" class="btn btn-primary mt-3">
+            Next
+          </button>
+        </div>
+        <div id="test-l-3" class="content">
+          <div class="col-12 col-md-7">
+            <h6 class="title-decorative">Step Three</h6>
+            <h3 class="h1">Add body specs</h3>
+           
+
+          </div>
+
+
+            <div class="form-row form-group">
+              <div class="col">
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  id="height"
+                  name="height"
+                  formControlName="height"
+                  placeholder="Height in Cm"
+                />
+              </div>
+              <div class="col">
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  id="weight"
+                  name="weight"
+                  formControlName="weight"
+                  placeholder="Weight in Kg"
+                />
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <label for="exampleFormControlSelect1"
+                >What time do you like to run?</label
+              >
+              <select
+                class="form-control"
+                formControlName="runtime"
+                name="skillLevel"
+                id="exampleFormControlSelect1"
+              >
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+              </select>
+            </div>
+          </div> -->
+          <div class="row" *ngIf="validationErrors.length > 0">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">
+                    {{error}}
+                </li>
+            </ul>
+          </div>
+          <!-- <div class="form-group text-center"> -->
+          <button [disabled]="!onBoardForm.valid" type="submit" class="btn btn-primary mr-2">Submit</button>
+          <button type="submit" class="btn btn-primary mr-2" (click)="cancel()">Cancel</button>
+          <!-- </div> -->
+        <!-- </div> -->
+
+    </div>
+  <!-- </div> -->
+<!-- </div> -->
+</form>
+<!-- <div class="form-group text-center">
+  <button [disabled]="!onBoardForm.valid" type="submit" class="btn btn-success mt-5">Submit</button>
+  <button type="submit" class="btn btn-default mt-5" (click)="cancel()">Cancel</button>
+<button [disabled]='!onBoardForm.valid' class="btn btn-success mr-2" type="submit">Register</button>
+<button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button> -->
+<!-- </div>  -->
+
+
+    <footer class="footer-short">
+      <div class="container">
+        <hr>
+        <nav class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#">
+                  <img alt="Image" src="assets/img/logo-gray.svg" />
+                </a>
+              </li>
+              <!-- <li class="list-inline-item">
+                <a href="#">Overview</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Documentation</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Changelog</a>
+              </li> -->
+            </ul>
+          </div>
+          <!--end of col-->
+          <!-- <div class="col-auto text-sm-right">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#"><i class="socicon-twitter"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#"><i class="socicon-facebook"></i></a>
+              </li>
+            </ul>
+          </div> -->
+          <!--end of col-->
+        </nav>
+        <!--end of row-->
+        <div class="row">
+          <div class="col">
+            <small>&copy; 2022 Medium Rare All Rights Reserved</small>
+          </div>
+          <!--end of col-->
+        </div>
+        <!--end of row-->
+      </div>
+      <!--end of container-->
+    </footer>
+  <!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- <div class="container">
   <div id="stepper1" class="bs-stepper">
     <div class="bs-stepper-header">
@@ -266,9 +620,9 @@
   </div>
 </div> -->
 
-<form [formGroup]='onBoardForm' (ngSubmit)="registerForm.valid && onBoardUpdate()" autocomplete="off">
+<!-- <form [formGroup]='onBoardForm' (ngSubmit)="registerForm.valid && onBoardUpdate()" autocomplete="off">
   <h2 class="text-center text-primary">Create your account</h2>
-  <hr>
+  <hr> -->
 <!-- <div class="form-group">
       <label class="control-label" style="margin-right: 10px;">I am a: </label>
       <label class="radio-inline">
@@ -278,7 +632,7 @@
           <input type="radio" value='female' formControlName='gender' class="ml-3"> Female
       </label>
 </div>  -->
-<div id="container" type="text">
+<!-- <div id="container" type="text">
 
   <app-date-input [formControl]='onBoardForm.controls["dateOfBirth"]'
   [label]='"Date Of Birth"' [maxDate]='maxDate'></app-date-input>
@@ -299,12 +653,35 @@
           {{error}}
       </li>
   </ul>
-</div>
+</div> -->
 
-<div class="form-group text-center">
+<!-- <div class="form-group text-center">
           <button [disabled]="!onBoardForm.valid" type="submit" class="btn btn-success mt-5">Submit</button>
           <button type="submit" class="btn btn-default mt-5" (click)="cancel()">Cancel</button>
-      <!-- <button [disabled]='!onBoardForm.valid' class="btn btn-success mr-2" type="submit">Register</button>
+       <button [disabled]='!onBoardForm.valid' class="btn btn-success mr-2" type="submit">Register</button>
       <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button> -->
-  </div>
-</form>
+  <!-- </div>  -->
+<!-- </form> -->
+
+<!-- <div class="wizard">
+  <ul class="nav nav-tabs text-center row mb-5">
+    <li class="col-3"><a href="#first" class="step-circle step-circle-sm">1</a></li>
+    <li class="col-3"><a href="#second" class="step-circle step-circle-sm">2</a></li>
+    <li class="col-3"><a href="#third" class="step-circle step-circle-sm">3</a></li>
+    <li class="col-3"><a href="#fourth" class="step-circle step-circle-sm">4</a></li>
+  </ul><!-end of col-->
+  <!-- <div class="tab-content"> -->
+    <!-- <div id="first"> -->
+
+    <!-- <div> -->
+    <!-- <div id="second"> -->
+
+    <!-- </div> -->
+    <!-- <div id="third"> -->
+
+    <!-- </div> -->
+    <!-- <div id="fourth"> -->
+
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </div> -->

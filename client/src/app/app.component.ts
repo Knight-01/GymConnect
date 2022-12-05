@@ -3,6 +3,7 @@ import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Gym Connect';
   users: any;
   faCoffee = faCoffee;
-
+  
   constructor(private accountService: AccountService, private presence: PresenceService) {}
 
   ngOnInit(): void {

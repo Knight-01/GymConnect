@@ -9,6 +9,8 @@ import { Member } from '../_models/member';
 import { Photo } from '../_models/photo';
 import { environment } from 'src/environments/environment';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import Stepper from 'bs-stepper';
+import { FileUploader } from 'ng2-file-upload';
 
 
 
@@ -20,8 +22,8 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class OnboardComponent implements OnInit {
   @Input() registerForm: FormGroup
   @Output() cancelOnboard = new EventEmitter();
-  // private stepper: Stepper;
-  // uploader: FileUploader;
+  private stepper: Stepper;
+  uploader: FileUploader;
   onBoardForm: FormGroup;
   user: User;
   member: Member;
@@ -43,6 +45,7 @@ export class OnboardComponent implements OnInit {
     this.initializeForm();
     this.onBoardForm = new FormGroup({
       dateOfBirth: new FormControl(),
+      description: new FormControl(),
       height: new FormControl(),
       weight: new FormControl(),
       city: new FormControl(),
@@ -53,19 +56,20 @@ export class OnboardComponent implements OnInit {
     // this.getIP();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-    // this.stepper = new Stepper(document.querySelector('#stepper1')), {
-    //   linear: true,
-    //   animation: true,
-    // };
+    this.stepper = new Stepper(document.querySelector('#stepper1')), {
+      linear: true,
+      animation: true,
+    };
     // this.initializeUploader();
-    // this.bsConfig = {
-    //   containerClass: "theme-green",
-    // };
+    this.bsConfig = {
+      containerClass: "theme-green",
+    };
   }
 
   initializeForm() {
     this.onBoardForm = this.fb.group({
       dateOfBirth: ['', Validators.required],
+      description: ['', Validators.required],
       height: ['', Validators.required],
       weight: ['', Validators.required],
       city: ['', Validators.required],
@@ -75,9 +79,9 @@ export class OnboardComponent implements OnInit {
 
   }
 
-  // next() {
-  //   this.stepper.next();
-  // }
+  next() {
+    this.stepper.next();
+  }
 
   // initializeUploader() {
   //   this.uploader = new FileUploader({
@@ -91,25 +95,25 @@ export class OnboardComponent implements OnInit {
 
   //   });
 
-  //   this.response = '';
+    // this.response = '';
 
 
-  //   this.uploader.onAfterAddingFile = (file) => {
-  //     file.withCredentials = false;
-  //   };
+    // this.uploader.onAfterAddingFile = (file) => {
+    //   file.withCredentials = false;
+    // };
 
-  //   this.uploader.onSuccessItem = (item, response, status, headers) => {
-  //     if (response) {
-  //       const photo: Photo = JSON.parse(response);
-  //       this.member.photos.push(photo);
-  //       this.setMainPhoto(photo);
-  //        if (photo.isMain) {
-  //          this.user.photoUrl = photo.url;
-  //          this.member.photoUrl = photo.url;
-  //          this.accountService.setCurrentUser(this.user);
-  //        }
-  //     }
-  //   }
+    // this.uploader.onSuccessItem = (item, response, status, headers) => {
+    //   if (response) {
+    //     const photo: Photo = JSON.parse(response);
+    //     this.member.photos.push(photo);
+    //      this.setMainPhoto(photo);
+    //      if (photo.isMain) {
+    //        this.user.photoUrl = photo.url;
+    //        this.member.photoUrl = photo.url;
+    //        this.accountService.setCurrentUser(this.user);
+    //      }
+    //   }
+    // }
   //   this.uploader.response.subscribe(res => this.response = "Photo uploaded. Success!");
 
   // }
@@ -135,7 +139,7 @@ export class OnboardComponent implements OnInit {
 
   cancel() {
     this.cancelOnboard.emit(false);
-    this.router.navigateByUrl('/register');
+    this.router.navigate['/register'];
   }
 
   // getIP() {
@@ -143,6 +147,7 @@ export class OnboardComponent implements OnInit {
   //     this.onBoardForm.patchValue({
   //       city: res.city,
   //       state: res.region,
+  //       country: res.country
   //     });
   //   })
   // }

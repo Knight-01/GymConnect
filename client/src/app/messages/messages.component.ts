@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Message } from '../_models/message';
 import { Pagination } from '../_models/pagination';
@@ -27,7 +28,8 @@ export class MessagesComponent implements OnInit {
 
   constructor(private messageService: MessageService,
     private confirmService: ConfirmService,
-    private accountService: AccountService) {
+    private accountService: AccountService,
+    private toastr: ToastrService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
         this.user = user;
         this.userParams = new UserParams(user);
@@ -52,6 +54,7 @@ export class MessagesComponent implements OnInit {
       if (result) {
         this.messageService.deleteMessage(id).subscribe(() => {
           this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+          this.toastr.success("Message deleted successfully");
         })
       }
     })

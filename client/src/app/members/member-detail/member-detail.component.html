@@ -1,14 +1,25 @@
-<div class="row" *ngIf="member">
-    <div class="col-4">
+<div class="container align-self-start">
+  <div class="row mb-5">
+    <div class="col text-center">
+      <a href="#">
+        <img alt="Image" src="assets/img/logo-gray.svg" />
+      </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
         <div class="card">
             <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
                 class="card-img-top img-thumbnail">
             <div class="card-body">
                 <div class="mb-2" *ngIf="(presence.onlineUsers$ | async).includes(member.username)">
-                    <i class="fa fa-user-circle text-success"></i>Online now
+                    <i class="fa fa-user-circle text-success"></i> Online now
                 </div>
                 <div>
-                   <strong>Location:</strong>
+                   <strong><i class="icon-location"></i></strong>
+                   <!-- <span class="text-small text-muted"><i class="icon-location"></i>
+                      {{member.city}}, {{member.country}}</span> -->
                    <p>{{member.city}}, {{member.country}}</p>
                 </div>
                 <div>
@@ -16,11 +27,15 @@
                    <p>{{member.age}}</p>
                 </div>
                 <div>
-                   <strong>Bmi:</strong>
-                   <p>{{member.bmi}}</p>
+                  <strong>Bmi:</strong>
+                  <p>{{member.bmi}}</p>
+               </div>
+                <div>
+                   <strong>Height:</strong>
+                   <p>{{member.height}} cm</p>
                 </div>
                 <div>
-                   <strong>Last Active:</strong>
+                   <strong>Last online:</strong>
                    <p>{{member.lastActive | timeago }}</p>
                 </div>
                 <div>
@@ -29,8 +44,9 @@
                 </div>
                 <div class="card-footer">
                     <div class="btn-group d-flex">
-                        <button (click)="addInvite(member)" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i></button>
-                        <button (click)="selectTab(3)" class="btn btn-success" ><i class="fa fa-envelope"></i></button>
+                        <button (click)="addInvite(member)" class="btn btn-outline-primary"><i class="icon-add-user"> Invite</i></button>
+                        <button (click)="addLike(member)" class="btn btn-outline-primary"><i class="icon-thumbs-up"></i> Like</button>
+                        <button (click)="selectTab(3)" class="btn btn-outline-primary" ><i class="icon-mail"></i></button>
                     </div>
                 </div>
 
@@ -39,15 +55,15 @@
         </div>
 
     </div>
-    <div class="col-8">
+    <div class="col-sm-4">
         <tabset class="member-tabset" #memberTabs>
             <tab heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)">
                 <h4>Description</h4>
                 <p>{{member.introduction}}</p>
-                <h4>Workout Routine</h4>
-                <p>{{member.workoutRoutine}}</p>
             </tab>
             <tab heading='Exercise Regimen' (selectTab)="onTabActivated($event)">
+                <h4>Workout Routine</h4>
+                <p>{{member.workoutRoutine}}</p>
                 <h4>Dietary Plan</h4>
                 <p>{{member.dietaryPlan}}</p>
             </tab>
@@ -60,5 +76,57 @@
             </tab>
         </tabset>
     </div>
-
 </div>
+
+<footer class="footer-short">
+  <div class="container">
+    <hr />
+    <nav class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#">
+              <img alt="Image" src="assets/img/logo-gray.svg" />
+            </a>
+          </li>
+          <!-- <li class="list-inline-item">
+            <a href="#">Overview</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Documentation</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Changelog</a>
+          </li> -->
+        </ul>
+      </div>
+      <!--end of col-->
+      <!-- <div class="col-auto text-sm-right">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#"><i class="socicon-github"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#"><i class="socicon-linkedin"></i></a>
+          </li>
+        </ul>
+      </div> -->
+      <!--end of col-->
+    </nav>
+    <!--end of row-->
+    <div class="row">
+      <div class="col">
+        <small>&copy; 2022 All Rights Reserved</small>
+      </div>
+      <!--end of col-->
+    </div>
+    <!--end of row-->
+  </div>
+  <!--end of container-->
+</footer>
+
+
+
+
+
+
