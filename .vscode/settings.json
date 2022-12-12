@@ -1,5 +1,6 @@
 {
     "editor.showDeprecated": true,
     "editor.fontLigatures": false,
-    "workbench.settings.openDefaultSettings": false
+    "workbench.settings.openDefaultSettings": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/d3af0864-4eb5-4211-a3c5-ac004fd49e3e/AppServices/subscriptions/d3af0864-4eb5-4211-a3c5-ac004fd49e3e/resourceGroups/GymConnect/providers/Microsoft.Web/sites/gymconnect", 
 }
