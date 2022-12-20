@@ -5,7 +5,7 @@ GymConnect is an online fitness platform. It allows users to share their fitness
 ![GymConnect](https://user-images.githubusercontent.com/53930336/208546420-3c63aef3-94d9-4e3b-b3d6-545f48144304.PNG)
 
 ---
-## _Getting started_ 
+## _Getting started_ 🏃‍♂️
 
 - Go into directory where you plan on keeping project and run.
   git fork https://github.com/Knight-01/GymConnect.git
