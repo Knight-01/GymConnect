@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.10" />
   </ItemGroup>
 
+  <!-- <ItemGroup>
+    <ProjectReference Include="Gymconnect.Tests\GymConnect.Tests.csproj" />
+  </ItemGroup> -->
+
 </Project>

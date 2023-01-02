@@ -18,6 +18,7 @@ import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},

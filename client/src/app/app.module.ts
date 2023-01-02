@@ -39,7 +39,7 @@ import { LoginComponent } from './login/login.component';
 import { InvitesComponent } from './invites/invites.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { ProfileComponent } from './profile/profile.component';
+
 
 
 
@@ -72,7 +72,6 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     InvitesComponent,
     ResetPasswordComponent,
-    ProfileComponent,
   ],
 
   imports: [

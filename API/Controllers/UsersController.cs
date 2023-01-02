@@ -24,6 +24,10 @@ namespace API.Controllers
 
         }
 
+        // public UsersController(IMapper _mapper2, global::GymConnect.Tests.Controller.IMapper _mapper1, global::GymConnect.Tests.Controller.IMapper _mapper)
+        // {
+        // }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {

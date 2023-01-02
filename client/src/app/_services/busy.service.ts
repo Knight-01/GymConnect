@@ -12,7 +12,7 @@ export class BusyService {
   busy() {
     this.busyRequestCount++;
     this.spinnerService.show(undefined, {
-      type: 'ball-beat',
+      type: 'line-spin-clockwise-fade',
       bdColor: 'rgba(255,255,255,0)',
       color: '#555555'
     });

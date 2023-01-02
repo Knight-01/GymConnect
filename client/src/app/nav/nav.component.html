@@ -116,16 +116,18 @@
           </ng-container>
           </ul>
 
-          <div class="nav-item justify-content-end" *ngIf="accountService.currentUser$ | async">
+          <!-- <div class="nav-item justify-content-end" *ngIf="accountService.currentUser$ | async">
             <a [routerLink]="['/messages']" class="nav-link js-scroll-trigger ml-auto text-light text-decoration-none" routerLinkActive='active'><i class="icon-mail"></i></a>
-          </div>
+          </div> -->
 
           <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
             <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
               <a class="dropdown-toggle text-light ml-3 text-decoration-none" dropdownToggle>Welcome {{user.knownAs || user.username | titlecase}}</a>
               <div class="dropdown-menu mt-3" *dropdownMenu>
                   <a routerLink='/member/edit/' class="dropdown-item">Edit Profile</a>
-                  <div class="dropdown-divider"></div>
+                  <!-- <div class="dropdown-divider"></div> -->
+                  <a routerLink='/messages' class="dropdown-item">Messages</a>
+                  <!-- <div class="dropdown-divider"></div> -->
                   <a class="dropdown-item" (click)="logout()">Logout</a>
               </div>
           </div>
